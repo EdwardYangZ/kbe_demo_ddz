@@ -6,6 +6,7 @@
 
 ----------
 ## 导入
+0. kbengine 1.X - kbengine 2.0.0
 1. 拷贝文件到对应目录
 - kbe_async_lib/common/Promise.py
 - kbe_async_lib/common/Async.py
