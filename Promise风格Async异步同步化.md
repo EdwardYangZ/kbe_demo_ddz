@@ -38,14 +38,14 @@ def startGame(self):
   self.doFapai()
   yield self.delay(2.5)
   
-  # 叫地主
+  # 开始叫地主直到结束叫地主状态
   ret = yield self.doBankerJiao()
   if not ret:
     # 叫地主失败则重新开始
     self.doStart()
     return False
     
-  # 抢地主
+  # 开始抢地主直到抢地主结束
   bankerSeat = yield self.doBankerQiang()
   
   # 确定地主并暂停1.5秒
