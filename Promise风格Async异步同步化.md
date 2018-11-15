@@ -7,11 +7,11 @@
 ----------
 ## 导入
 1. 拷贝文件到对应目录
-- scripts/common/Promise.py
-- scripts/common/Async.py
-- scripts/common/kbe.py
-- scripts/entity_defs/interfaces/EntityBase.def
-- scripts/entity_defs/interfaces/EntityCell.def
+- kbe_async_lib/common/Promise.py
+- kbe_async_lib/common/Async.py
+- kbe_async_lib/common/kbe.py
+- kbe_async_lib/entity_defs/interfaces/EntityBase.def
+- kbe_async_lib/entity_defs/interfaces/EntityCell.def
 2. entity_defs中对Entity的Implements加入EntityBase或者EntityCell
 ````
 <Implements>
