@@ -5,6 +5,45 @@
 - 对kbengine的实体Entity类进行拓展，实现常用异步调用函数
 
 ----------
+## 导入
+1. 拷贝文件到对应目录
+- scripts/common/Promise.py
+- scripts/common/Async.py
+- scripts/common/kbe.py
+- scripts/entity_defs/interfaces/EntityBase.def
+- scripts/entity_defs/interfaces/EntityCell.def
+2. entity_defs中对Entity的Implements加入EntityBase或者EntityCell
+````
+<Implements>
+    <!-- 包含Base部分就需要 EntityBase -->
+	<Interface>	EntityBase		</Interface>
+    <!-- 包含Cell部分就需要 EntityCell -->
+    <Interface>	EntityCell		</Interface>
+</Implements>
+````
+3. base目录中对应Entity类
+````
+import Async, kbe
+class Account(KBEngine.Proxy, kbe.Base):
+    def __init__(self):
+		KBEngine.Proxy.__init__(self)
+        
+    @Async.async_func
+    def foo():
+        pass
+````
+4. cell目录中对应Entity类
+````
+import Async, kbe
+class Player(KBEngine.Entity, kbe.Entity):
+    def __init__(self):
+		KBEngine.Entity.__init__(self)
+        
+    @Async.async_func
+    def foo():
+        pass
+````
+----------
 ## 基本用法
 
 ### Promise:
