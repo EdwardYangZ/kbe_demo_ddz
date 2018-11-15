@@ -7,7 +7,7 @@
 ----------
 ## 用法
 
-### Promise
+### Promise:
 Promise的概念来自于javascript, 为解决异步问题而生，这里的Promise经过简化之后：
 - 创建对象之后只能由'未resolve'状态->'已resolve'，即'resolve事件'
 - 通过.resolve传入result数据，如果'已resolve'，则调用不超过
@@ -28,37 +28,57 @@ promise.then(lambda r: print(r + r))
 # >>> endend
 
 def _func(resolve):
- addCallback(resolve)
+    addCallback(resolve)
 Promise(_func)
 # 在创建时绑定另一个回调
 ````
 
 ### Async装饰器:
+被装饰的函数中可以通过 yield promise 来挂起函数执行, 直到
 ````
-import Async
+import Async, time, Promise
+
+def foo():
+    def _fn(resolve):
+        resolve('foo end')
+    return Promise.Promise(_fn)
 
 @Async.async_func
 def func():
- return 'end'
-````
+    res = yield foo()
+    return ret + ' func end'
 
+# 被装饰的函数中可以通过 yield + promise 来挂起函数执行, promise resolve 之后会把结果变量放入res, 函数接着执行
+
+f = func()
+# 被Async.async_func装饰的函数调用会返回一个promise对象, 被装饰函数执行到return则是调用promise.resolve(..)
+ 
+f.then(print)
+# >>> foo end func end
+# 打印被装饰函数的return结果
+
+@Async.async_func
+def func2():
+    res = yield func()
+# 同样的, 异步函数中也可以yield另一个异步函数
+````
 ````
 # promise 函数定义，最后必须 return 一个 promise 对象
 def delay(self, interval):
-  ''' 延迟调用 '''
-  self._timers = getattr(self, '_timers', {})
-  promise = Promise.Promise()
-  timerID = self.addTimer(interval, 0, 0)
-  self._timers[timerID] = promise.resolve
-  return promise
+    ''' 延迟调用 '''
+    self._timers = getattr(self, '_timers', {})
+    promise = Promise.Promise()
+    timerID = self.addTimer(interval, 0, 0)
+    self._timers[timerID] = promise.resolve
+    return promise
   
 # 
  
 # 异步函数定义
 @Async.async_func
 def func(self):
-  res = yield self.delay(2)
-  return 'func return'
+    res = yield self.delay(2)
+    return 'func return'
 
 # 可以像普通函数一样直接调用, 得到一个promise对象，这样的调用不理会最终结果
 self.func()
