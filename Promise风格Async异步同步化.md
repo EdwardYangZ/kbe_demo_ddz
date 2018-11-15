@@ -15,6 +15,16 @@ def giveClientToPlayer(self, player):
     nick=self.nick,
     gold=self.gold
   ))
+  self.updGold()
+  
+@Async.async_func
+def updGold(self, playerCell):
+  ''' 每5秒更新一次gold属性 '''
+  yield self.delay(5)
+  while self.playerID == playerCell.id:
+    gold, = yield self.request(playerCell, 'getProps', ('gold',))
+    self.gold = gold
+    yield self.delay(5)
 ````
 ### 异步流程化:
 ````
