@@ -1,0 +1,2 @@
+# kbe_demo_ddz
+基于kbengine的斗地主demo，由kbengine拓展promise风格的async实现和应用
