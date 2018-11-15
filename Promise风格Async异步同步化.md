@@ -1,4 +1,5 @@
 # 在kbengine中实现Promise风格的Async异步同步化编程
+## 用例：
 ### 远程调用:
 ````
 @Async.async_func
