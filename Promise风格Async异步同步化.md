@@ -1,5 +1,57 @@
 # 在kbengine中实现Promise风格的Async异步同步化编程
-## 使用示例
+----------
+## 简介
+- Async装饰器+Promise类，通过封装回调函数，轻松实现异步调用的同步化，大大简化异步逻辑处理
+- 对kbengine的实体Entity类进行拓展，实现常用异步调用函数
+
+----------
+## 用法
+
+### Promise
+Promise的概念来自于javascript, 为解决异步问题而生，这里的Promise经过简化之后：
+- 创建对象之后只能由'未resolve'状态->'已resolve'，即'resolve事件'
+- 通过.resolve传入result数据，如果'已resolve'，则调用不超过
+- 通过.then绑定'resolve事件'触发的回调，可绑定多个，如果已经处于'已resolve'状态，立刻触发回调
+- 可在创建promise对象时把resolve的调用逻辑确定
+````
+promise = Promise()
+# 创建promise
+
+promise.then(print)
+# 绑定resolve回调, resolve之后打印出结果
+ 
+promise.resolve('end')
+# 输出: end
+ 
+````
+````
+# promise 函数定义，最后必须 return 一个 promise 对象
+def delay(self, interval):
+  ''' 延迟调用 '''
+  self._timers = getattr(self, '_timers', {})
+  promise = Promise.Promise()
+  timerID = self.addTimer(interval, 0, 0)
+  self._timers[timerID] = promise.resolve
+  return promise
+  
+# 
+ 
+# 异步函数定义
+@Async.async_func
+def func(self):
+  res = yield self.delay(2)
+  return 'func return'
+
+# 可以像普通函数一样直接调用, 得到一个promise对象，这样的调用不理会最终结果
+self.func()
+
+# 使用回调函数可以取得调用结果，也就是输出'func return'
+self.func().then(print)
+
+# 被@Async.async_func的函数中这样调用
+
+````
+## Promise
 ### 远程调用:
 ````
 @Async.async_func
