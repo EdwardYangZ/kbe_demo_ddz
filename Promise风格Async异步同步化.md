@@ -5,7 +5,7 @@
 - 对kbengine的实体Entity类进行拓展，实现常用异步调用函数
 
 ----------
-## 用法
+## 基本用法
 
 ### Promise:
 Promise的概念来自于javascript, 为解决异步问题而生，这里的Promise经过简化之后：
@@ -34,7 +34,6 @@ Promise(_func)
 ````
 
 ### Async装饰器:
-被装饰的函数中可以通过 yield promise 来挂起函数执行, 直到
 ````
 import Async, time, Promise
 
@@ -62,35 +61,26 @@ def func2():
     res = yield func()
 # 同样的, 异步函数中也可以yield另一个异步函数
 ````
-````
-# promise 函数定义，最后必须 return 一个 promise 对象
-def delay(self, interval):
-    ''' 延迟调用 '''
-    self._timers = getattr(self, '_timers', {})
-    promise = Promise.Promise()
-    timerID = self.addTimer(interval, 0, 0)
-    self._timers[timerID] = promise.resolve
-    return promise
-  
-# 
+----------
+## kbe拓展:
+kbengine的内置函数都是通过回调实现异步逻辑, 用promise对回调进行封装就可以改造为异步调用函数
  
-# 异步函数定义
-@Async.async_func
-def func(self):
-    res = yield self.delay(2)
-    return 'func return'
-
-# 可以像普通函数一样直接调用, 得到一个promise对象，这样的调用不理会最终结果
-self.func()
-
-# 使用回调函数可以取得调用结果，也就是输出'func return'
-self.func().then(print)
-
-# 被@Async.async_func的函数中这样调用
-
-````
-## Promise
-### 远程调用:
+- kbe.Entity.delay:
+    一次性定时器
+- kbe.Entity.onRequest:
+    远程请求接收端, 需要**注册远程函数**
+- kbe.Entity.onResponse:
+    远程请求回应端, 需要**注册远程函数**
+- kbe.Entity.request:
+    远程请求发起端, 传入远程对象, 远程调用函数名称, 调用参数来发起远程请求, 配合onRequest/onResponse实现远程参数和回应数据传递
+- kbe.Base.whenGetCell:
+    base中的entity, 等待其cell创建完毕, 也就是 onGetCell 回调函数被调用时, 用于异步获取base的cell对象
+- kbe.Base.whenLoseCell:
+    base中的entity, 等待其cell移除, 也就是 onLoseCell 回调函数被调用时
+ 
+----------
+## 用例
+### Account转换为Player, 并自动同步属性:
 ````
 @Async.async_func
 def giveClientToPlayer(self, player):
@@ -117,7 +107,7 @@ def updGold(self, playerCell):
     self.gold = gold
     yield self.delay(5)
 ````
-### 异步流程化:
+### 组织异步逻辑流程:
 ````
 @Async.async_func
 def startGame(self):
