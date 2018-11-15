@@ -21,9 +21,27 @@ promise.then(print)
 # 绑定resolve回调, resolve之后打印出结果
  
 promise.resolve('end')
-# 输出: end
- 
+# >>> end
+
+promise.then(lambda r: print(r + r))
+# 之后的then会立马调用回调函数
+# >>> endend
+
+def _func(resolve):
+ addCallback(resolve)
+Promise(_func)
+# 在创建时绑定另一个回调
 ````
+
+### Async装饰器:
+````
+import Async
+
+@Async.async_func
+def func():
+ return 'end'
+````
+
 ````
 # promise 函数定义，最后必须 return 一个 promise 对象
 def delay(self, interval):
