@@ -17,8 +17,31 @@
 
 ## 服务器说明
 
-### Promise 风格的 async 异步同步化实现
+### Promise 风格的 async 异步同步化
 > https://github.com/EdwardYangZ/kbe_async
+
+```
+import KBEngine
+import kbe
+import Async
+
+class Hall(KBEngine.Base, kbe.Base):
+    def __init__(self):
+        KBEngine.Base.__init__(self)
+
+    @Async.async_func
+    def test(self):
+        print('函数执行开始')
+        yield self.delay(5)
+        print('5秒之后才打印这句话')
+```
+* **kbe.Entity.request** 对另一个实体发起远程请求
+```
+@Async.async_func
+def foo(self):
+    gold, = yield self.request(self.cell, 'getProps', ['gold'])
+    print(gold)
+```
 
 ### Entity 说明
 * Hall

@@ -29,7 +29,6 @@ var BaseVm = cc.Class({
  * !#zh app 根管理对象
  */
 var App = cc.Class({
-	name: 'zz.App',
 	extends: require('BaseM'),
 	properties: {
 		KBEngine: {

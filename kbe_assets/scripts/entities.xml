@@ -5,8 +5,6 @@
 					http://www.kbengine.org/cn/docs/programming/entitydef.html
 	-->
 
-	<!-- <PlayerBird hasClient="true"></PlayerBird>
-	<GameBird></GameBird> -->
 	<Account hasClient="true"></Account>
 	<Hall></Hall>
 	<PlayerDdz hasClient="true"></PlayerDdz>
