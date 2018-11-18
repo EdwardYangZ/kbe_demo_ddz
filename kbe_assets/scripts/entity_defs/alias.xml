@@ -1,0 +1,16 @@
+<root>
+	<DBID>			INT64		    </DBID>
+	<EID>			INT64		    </EID>
+
+	<!-- 扑克牌 -->
+	<CARD>			UINT8		    </CARD>
+	<POKER>			ARRAY <of> CARD	</of>	</POKER>
+	
+	<!-- 游戏场次 -->
+	<GAME_LEVEL> FIXED_DICT
+		<Properties>
+			<baseScore> <Type>	INT32	</Type> </baseScore>
+			<goldMin> <Type>	INT32	</Type> </goldMin>
+		</Properties>
+	</GAME_LEVEL>
+</root>

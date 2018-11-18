@@ -1,0 +1,23 @@
+<root>
+	<Implements>
+		<Interface>	EntityBase		</Interface>
+		<Interface>	EntityCell		</Interface>
+	</Implements>
+
+	<Properties>
+		<nick>
+			<Type>		STRING			</Type>
+			<Flags>		ALL_CLIENTS	</Flags>
+		</nick>
+	</Properties>
+
+	<ClientMethods>
+	</ClientMethods>
+
+	<BaseMethods>
+	</BaseMethods>
+
+	<CellMethods>
+	</CellMethods>
+
+</root>

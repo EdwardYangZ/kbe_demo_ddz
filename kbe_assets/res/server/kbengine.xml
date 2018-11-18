@@ -1,0 +1,193 @@
+<root>
+	<!--
+		服务端配置({assets}/res/server/kbengine.xml)
+
+		如果你需要改变引擎设置, 请在({assets}/res/server/kbengine.xml)中覆盖kbe/res/server/kbengine_defs.xml的对应参数来修改, 
+		这样的好处是不会破坏引擎的默认设置，在你更新引擎时也不会产生冲突，以及在多个逻辑项目时不会影响到其他的项目设置。
+		详细说明请参考：http://kbengine.org/cn/docs/configuration/kbengine.html
+	-->
+	<bitsPerSecondToClient> 400000 </bitsPerSecondToClient>
+	<packetAlwaysContainLength> 1 </packetAlwaysContainLength>
+	<gameUpdateHertz> 10 </gameUpdateHertz>
+
+	<trace_packet>
+		<debug_type> 0 </debug_type>
+		<use_logfile>true</use_logfile>
+	</trace_packet>
+
+	<debugEntity>0</debugEntity>
+
+	<channelCommon>
+		<windowOverflow>
+			<receive>
+				<bytes>
+					<internal>	0			</internal>
+					<external>	8164		</external>
+				</bytes>
+			</receive>
+		</windowOverflow>
+	</channelCommon>
+	
+	<publish>
+		<!-- 发布状态, 可在脚本中获取该值。 KBEngine.publish()
+			(apps released state, This value can be obtained in the script. KBEngine.publish())
+			Type: Integer8
+			0 : debug
+			1 : release
+			其他自定义(Other custom)
+		-->
+		<state> 0 </state>
+
+		<!-- 脚本层发布的版本号
+			(Script layer released version number)
+		 -->
+		<script_version> 1.0.0 </script_version>
+	</publish>
+
+	<cellapp>
+		<coordinate_system>
+			<enable> true </enable>
+		</coordinate_system>
+
+		<defaultAoIRadius>			
+			<radius> 80.0 </radius>
+			<hysteresisArea> 0.0 </hysteresisArea>
+		</defaultAoIRadius>
+		
+	</cellapp>
+	
+	<dbmgr>
+		<account_system>
+			<!-- 账号Entity的名称 -->
+			<accountEntityScriptType>	Account	</accountEntityScriptType>
+			
+			<!-- 账号注册相关
+				(Account registration)
+			-->
+			<account_registration> 
+				<!-- 是否开放注册 
+					(Whether open registration)
+				-->
+				<enable>	true	</enable>
+				
+				<!-- 登录合法时游戏数据库找不到游戏账号则自动创建 
+					(When logged in, the game database can not find the game account is automatically created)
+				-->
+				<loginAutoCreate> true </loginAutoCreate>
+			</account_registration>
+		</account_system>
+		
+		<telnet_service>
+			<port> 32000 </port>
+			<password> 123456 </password>
+			<!-- 命令默认层 
+				(layer of default the command)
+			-->
+			<default_layer> python </default_layer>
+		</telnet_service>
+
+		<databaseInterfaces>
+			<default>
+				<host> localhost </host>
+				<port> 3306 </port>
+				<auth>  
+					<username> kbe </username>									<!-- Type: String -->
+					<password> kbe </password>
+					<!-- 为true则表示password是加密(rsa)的, 可防止明文配置 
+						(is true, password is RSA)
+					-->
+					<encrypt> false </encrypt>
+				</auth>
+				<databaseName> kbedm </databaseName>
+			</default>
+		</databaseInterfaces>
+
+		<InterfacesServiceAddr>
+			<!-- 如果enable为false则相关数据不转发到Interfaces进程 
+				注意：如果为true，dbmgr认为数据将由interfaces交给第三方平台处理
+			-->
+			<enable> true		</enable>
+			<host>	 localhost	</host>
+			<port>	 30099		</port>
+		</InterfacesServiceAddr>
+	</dbmgr>
+	
+	<baseapp>
+		<backupPeriod> 500 </backupPeriod>
+		<!-- <externalAddress> 114.115.180.155 </externalAddress> -->
+	</baseapp>
+
+
+	<loginapp>
+		<encrypt_login> 2 </encrypt_login>
+	</loginapp>
+
+	<machine>
+		<!-- 服务组使用多台硬件组成网络，在某些网络环境由于路由器的设置不允许UDP广播造成跨物理机组网不成功时
+			可在此填入所有相关物理机的地址，引擎将会向具体的地址发送探测包来完成组网。
+			（When the network is composed of a plurality of hardware, the specific network address is detected.） 
+		-->
+		<addresses>
+			<!-- <item> 192.168.0.13 </item>
+			<item> 127.0.0.1 </item> -->
+			<!--<item> 23.91.102.31 </item>-->
+		</addresses>
+	</machine>
+	
+
+	<bots>
+		<!-- <host>	 localhost	</host> -->
+		<!-- <host>	 114.115.180.155	</host> -->
+		<entryScriptFile> kbemain </entryScriptFile>
+			
+		<!-- 指定接口地址，可配置网卡名、MAC、IP
+			（Interface address specified, configurable NIC/MAC/IP） 
+		-->
+		<internalInterface>  </internalInterface>
+		
+		<!-- 对应baseapp的externalAddress的解决方案，当externalAddress强制下发公网IP提供登陆时，
+			如果局域网内部使用机器人测试也走公网IP和流量可能会不合适，此时可以设置为true，登陆时强制直接使用内网环境。
+			Corresponding to baseapp->externalAddress solution, when externalAddress mandatory release of the public network to provide landing IP,
+			If the use of robot within the LAN test also take the public network IP and traffic may be inappropriate, can be set to true, 
+			when landing forced to use the internal network environment. -->
+		<forceInternalLogin> false </forceInternalLogin>
+		
+		<!-- loginapp地址 
+			（loginapp address)
+		-->
+		<host> localhost </host>										<!-- Type: String -->
+		<port> 20013 </port>											<!-- Type: Integer -->
+		
+		<!-- 在Entity初始化时是否触发属性的set_*事件 -->
+		<isOnInitCallPropertysSetMethods> true </isOnInitCallPropertysSetMethods>
+		
+		<!-- 默认启动进程后自动添加这么多个机器人 
+			(After starting the process, automatically add some robots)
+			totalCount	： 添加总数量			(Add the total-number)
+			tickTime	： 每次添加所用时间(s)	(Interval time-secs)
+			tickCount	： 每次添加数量			(Each time you add the number of)
+		-->
+		<defaultAddBots> 
+			<totalCount> 2  </totalCount>								<!-- Type: Integer -->
+			<tickTime> 0.1  </tickTime>									<!-- Type: Float -->
+			<tickCount> 5  </tickCount>									<!-- Type: Integer -->
+		</defaultAddBots>
+		
+		<!-- 机器人账号相关 
+			(about bots-accounts)
+		-->
+		<account_infos>
+			<!-- 机器人账号名称的前缀 
+				(The account name prefix)
+			-->
+			<account_name_prefix>		bot_	</account_name_prefix>
+			
+			<!-- 机器人账号名称的后缀递增, 0使用随机数递增， 否则按照填写的数递增 
+				注意：想让机器人每次登陆使用相同的账号请设置固定的bots程序启动时的cid参数，具体参考服务器启动脚本，机器人账号由"前缀+cid+后缀组成"。
+				(The account name suffix, 0 is the use of random number, Otherwise, use account_name_suffix_inc and increasing.)
+			-->
+			<account_name_suffix_inc>	1001		</account_name_suffix_inc><!-- Type: Integer -->
+		</account_infos>
+		
+	</bots>
+</root>

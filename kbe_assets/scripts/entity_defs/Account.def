@@ -1,0 +1,49 @@
+<root>
+    <Implements>
+        <!-- 包含Base部分就需要 EntityBase -->
+        <Interface>	EntityBase		</Interface>
+    </Implements>
+
+    <Properties>
+        <!-- 持有 player 的 id -->
+        <playerid>
+            <Type>      EID     </Type>
+            <Flags>     BASE    </Flags>
+        </playerid>
+        <!-- 昵称 -->
+        <nick>
+            <Type>      UNICODE         </Type>
+            <Flags>     BASE_AND_CLIENT </Flags>
+            <Persistent> true </Persistent>
+        </nick>
+        <!-- 金币 -->
+        <gold>
+            <Type>      INT32           </Type>
+            <Flags>     BASE_AND_CLIENT	</Flags>
+            <Persistent> true </Persistent>
+        </gold>
+    </Properties>
+
+    <ClientMethods>
+        <reqGameLevel>
+            <Arg>	ARRAY <of> GAME_LEVEL	</of>	</Arg>
+        </reqGameLevel>
+    </ClientMethods>
+
+    <BaseMethods>
+        <!-- 请求开始游戏 -->
+        <reqStartGame>
+            <Exposed/>
+            <Arg>	STRING	</Arg>
+            <Arg>	INT8	</Arg>
+        </reqStartGame>
+        <!-- 请求得到游戏等级配置 -->
+        <reqGameLevel>
+            <Exposed/>
+        </reqGameLevel>
+    </BaseMethods>
+
+    <CellMethods>
+    </CellMethods>
+
+</root>

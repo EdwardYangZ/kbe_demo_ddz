@@ -1,0 +1,46 @@
+<root>
+    <Implements>
+        <!-- 拓展Entity的 Base 部分 -->
+        <Interface> EntityBase  </Interface>
+        <!-- 拓展Entity的 Cell 部分 -->
+        <Interface> EntityCell  </Interface>
+        <!-- 房间实体接口 -->
+        <Interface> Room        </Interface>
+    </Implements>
+
+    <Properties>
+        <!-- 开始状态 -->
+        <started>
+            <Type>		INT8			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </started>
+        <bankerSeat>
+            <Type>		INT8			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </bankerSeat>
+        <baseScore>
+            <Type>		INT32			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </baseScore>
+        <curRate>
+            <Type>		INT8			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </curRate>
+        <curTurn>
+            <Type>		INT8			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </curTurn>
+        <turnCutdown>
+            <Type>		INT8			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </turnCutdown>
+        <bankerPoker>
+            <Type>		POKER			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </bankerPoker>
+        <lastDiscardSeat>
+            <Type>		INT8			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </lastDiscardSeat>
+    </Properties>
+</root>

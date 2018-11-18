@@ -1,0 +1,26 @@
+<root>
+    <Implements>
+        <Interface>	EntityBase		</Interface>
+    </Implements>
+
+    <ClientMethods>
+    </ClientMethods>
+
+    <BaseMethods>
+        <!-- 请求匹配房间 -->
+        <doMatchGame>
+            <Arg>	MAILBOX	</Arg>
+            <Arg>	STRING	</Arg>
+            <Arg>	INT8	</Arg>
+            <Arg>	EID	</Arg>
+        </doMatchGame>
+        <!-- 请求离开房间 -->
+        <doPlayerLeaveRoom>
+            <Arg>	EID	</Arg>
+        </doPlayerLeaveRoom>
+    </BaseMethods>
+
+    <CellMethods>
+    </CellMethods>
+
+</root>

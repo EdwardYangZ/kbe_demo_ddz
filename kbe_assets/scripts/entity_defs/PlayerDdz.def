@@ -1,0 +1,75 @@
+<root>
+    <Implements>
+        <Interface>	EntityBase		</Interface>
+        <Interface>	EntityCell		</Interface>
+        <Interface>	Player		</Interface>
+    </Implements>
+
+    <Properties>
+        <bankerJiao>
+            <Type>		INT8			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </bankerJiao>
+        <bankerQiang>
+            <Type>		INT8			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </bankerQiang>
+        <poker>
+            <Type>		POKER			</Type>
+            <Flags>		CELL_PUBLIC_AND_OWN	</Flags>
+        </poker>
+        <pokerCount>
+            <Type>		INT8			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </pokerCount>
+        <discard>
+            <Type>		POKER			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </discard>
+        <discardPass>
+            <Type>		INT8			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </discardPass>
+        <!-- 结算 -->
+        <settle>
+            <Type>		INT32			</Type>
+            <Flags>		ALL_CLIENTS	</Flags>
+        </settle>
+    </Properties>
+
+    <ClientMethods>
+        <onFapai>
+        </onFapai>
+        <onBankerPoker>
+        </onBankerPoker>
+        <onTurn>
+        </onTurn>
+        <reqHintDiscard>
+            <Arg>	POKER	</Arg>
+        </reqHintDiscard>
+        <onSettle>
+        </onSettle>
+    </ClientMethods>
+
+    <BaseMethods>
+    </BaseMethods>
+
+    <CellMethods>
+        <reqBankerJiao>
+            <Exposed/>
+            <Arg>	INT8	</Arg>
+        </reqBankerJiao>
+        <reqBankerQiang>
+            <Exposed/>
+            <Arg>	INT8	</Arg>
+        </reqBankerQiang>
+        <reqDiscard>
+            <Exposed/>
+            <Arg>	POKER	</Arg>
+        </reqDiscard>
+        <reqHintDiscard>
+            <Exposed/>
+        </reqHintDiscard>
+    </CellMethods>
+
+</root>
