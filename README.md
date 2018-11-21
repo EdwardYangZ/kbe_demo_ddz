@@ -7,7 +7,7 @@
 -------------
 ## 安装
 * kbengine 下载
-> https://github.com/kbengine/kbengine/releases/tag/v2.0.0-preview5
+> https://github.com/kbengine/kbengine/releases/tag/v1.0.0
 * kbengine 安装
 > https://www.comblockengine.com/docs/1.0/install/index/
 * cocos creator 下载
