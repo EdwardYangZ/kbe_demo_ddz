@@ -122,19 +122,6 @@
 		<encrypt_login> 2 </encrypt_login>
 	</loginapp>
 
-	<machine>
-		<!-- 服务组使用多台硬件组成网络，在某些网络环境由于路由器的设置不允许UDP广播造成跨物理机组网不成功时
-			可在此填入所有相关物理机的地址，引擎将会向具体的地址发送探测包来完成组网。
-			（When the network is composed of a plurality of hardware, the specific network address is detected.） 
-		-->
-		<addresses>
-			<!-- <item> 192.168.0.13 </item>
-			<item> 127.0.0.1 </item> -->
-			<!--<item> 23.91.102.31 </item>-->
-		</addresses>
-	</machine>
-	
-
 	<bots>
 		<!-- <host>	 localhost	</host> -->
 		<!-- <host>	 114.115.180.155	</host> -->

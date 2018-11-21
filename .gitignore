@@ -1,1 +1,6 @@
 /kbe_assets/logs/
+/kbe_assets/kbe/
+__pycache__/
+
+kbe_assets/scripts/base/__pycache__/Hall.cpython-34.pyc
+*.pyc

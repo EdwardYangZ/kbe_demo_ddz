@@ -130,35 +130,3 @@ def allDiscardsWithPoker(myPoker, poker):
     args = poker.enableType()
     assert args
     return myPoker.ableDiscards(*args)
-
-
-class DdzMind:
-    def __init__(self, myPoker):
-        self.reminds = DDZPoker(poker_util.getAllPoker())
-        self.myPoker = DDZPoker(myPoker)
-        self.reminds = DDZPoker(self.reminds - self.myPoker)
-
-    def bestDiscard(self, curDiscard):
-        pass
-
-    def getValue(self, poker):
-        poker = DDZPoker(poker)
-        value = 100
-        for ableType in ABLES:
-            dicards = list(poker.ableDiscards(*ableType))
-            if len(dicards):
-                last = dicards.pop()
-                if self.isHighestDiscard(last):
-                    poker = DDZPoker(poker - DDZPoker(last))
-                    while True:
-                        dicards = list(poker.ableDiscards(*ableType))
-
-    def isHighestDiscard(self, dicard):
-        return not self.reminds.ableDiscard(DDZPoker(dicard).enableType())
-
-
-def bestDiscard(myPoker, poker=None):
-    myPoker = DDZPoker(myPoker)
-    if poker:
-        poker = DDZPoker(poker)
-        args = poker.enableType()
