@@ -13,3 +13,4 @@ class GameDdz(KBEngine.Base, Room.Room):
 	"""
 	def __init__(self):
 		KBEngine.Base.__init__(self)
+ 
